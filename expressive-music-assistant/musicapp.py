@@ -5,7 +5,7 @@ import tempfile
 import os
 from music21 import converter, key, meter, chord, roman, interval
 
-# ✅ Initialize OpenAI client
+# ✅ Initialize OpenAI client from Streamlit Secrets
 client = openai.OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 st.title("🎼 Expressive Music Theory Assistant")
@@ -102,31 +102,25 @@ if uploaded_file is not None:
             {"role": "user", "content": prompt}
         ]
 
-        # ✅ Call OpenAI with the new SDK structure
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=messages,
-            temperature=0.7
-    )
-    gpt_text = response.choices[0].message.content.strip()
-    st.markdown("### 🎓 GPT Teaching Tips")
-    st.text_area("GPT Output", value=gpt_text, height=300)
+        try:
+            # ✅ GPT-4 API Call
+            response = client.chat.completions.create(
+                model="gpt-4",
+                messages=messages,
+                temperature=0.7
+            )
 
-    with open("gpt_expressive_analysis.txt", "w") as f:
-        f.write(gpt_text)
-    st.success("Saved as gpt_expressive_analysis.txt")
+            gpt_text = response.choices[0].message.content.strip()
+            st.markdown("### 🎓 GPT Teaching Tips")
+            st.text_area("GPT Output", value=gpt_text, height=300)
 
-except Exception as e:
-    st.error(f"OpenAI API call failed: {e}")
+            # Save result
+            with open("gpt_expressive_analysis.txt", "w") as f:
+                f.write(gpt_text)
+            st.success("Saved as gpt_expressive_analysis.txt")
 
-        gpt_text = response.choices[0].message.content.strip()
-        st.markdown("### 🎓 GPT Teaching Tips")
-        st.text_area("GPT Output", value=gpt_text, height=300)
-
-        # Save result
-        with open("gpt_expressive_analysis.txt", "w") as f:
-            f.write(gpt_text)
-        st.success("Saved as gpt_expressive_analysis.txt")
+        except Exception as e:
+            st.error(f"OpenAI API call failed: {e}")
 
     # Save JSON
     if st.button("💾 Save JSON"):
