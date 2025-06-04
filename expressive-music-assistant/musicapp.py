@@ -2,10 +2,11 @@ import streamlit as st
 import openai
 import json
 import tempfile
+import os
 from music21 import converter, key, meter, chord, roman, interval
 
 # ✅ Initialize OpenAI client
-client = openai.OpenAI(api_key="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")
+client = openai.OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 st.title("🎼 Expressive Music Theory Assistant")
 st.write("Upload a MIDI file to generate harmonic analysis and expressive teaching tips.")
