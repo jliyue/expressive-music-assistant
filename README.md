@@ -1,2 +1,8 @@
-# expressive-music-assistant
-The Expressive Music Theory Assistant is an interactive web app that helps music educators and learners generate deep, expressive insights from musical scores. Upload any MIDI file to instantly receive a detailed analysis of harmony, rhythm, pitch range, and melodic contour.
+## 🎼 Expressive Music Theory Assistant
+
+This app helps music theory professors, piano teachers, and students interpret music more expressively. Upload a MIDI file and get real-time analysis of harmonic structure, rhythm, register, and melodic motion — plus GPT-4-powered teaching tips.
+
+🧠 Built with Streamlit, music21, and OpenAI  
+🎓 Ideal for music classrooms, performance coaching, and independent study  
+🎵 Supports MIDI upload → Outputs analysis + expressive guidance  
+💬 GPT-4 generates interpretive suggestions tailored for teaching
