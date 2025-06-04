@@ -107,7 +107,17 @@ if uploaded_file is not None:
             model="gpt-4",
             messages=messages,
             temperature=0.7
-        )
+    )
+    gpt_text = response.choices[0].message.content.strip()
+    st.markdown("### 🎓 GPT Teaching Tips")
+    st.text_area("GPT Output", value=gpt_text, height=300)
+
+    with open("gpt_expressive_analysis.txt", "w") as f:
+        f.write(gpt_text)
+    st.success("Saved as gpt_expressive_analysis.txt")
+
+except Exception as e:
+    st.error(f"OpenAI API call failed: {e}")
 
         gpt_text = response.choices[0].message.content.strip()
         st.markdown("### 🎓 GPT Teaching Tips")
